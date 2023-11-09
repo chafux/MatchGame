@@ -50,8 +50,10 @@ namespace MatchGame
                 textBlock.Text = nextEmoji;
                 animalEmoji.RemoveAt(index);
             }
+        }
 
-  
+        private void TextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        {
 
         }
     }
