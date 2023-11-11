@@ -12,10 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.Windows.Threading;
+
 
 namespace MatchGame
 {
+    using System.Windows.Threading;
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
@@ -64,12 +65,17 @@ namespace MatchGame
             {
               if(textBlock.Name != "timeTextBlock")
                 {
+                    textBlock.Visibility = Visibility.Visible;
                     int index = random.Next(animalEmoji.Count);
                     string nextEmoji = animalEmoji[index];
                     textBlock.Text = nextEmoji;
                     animalEmoji.RemoveAt(index);
                 }
             }
+
+            timer.Start();
+            tenthsOfSecondesElapsed = 0;
+            matchesFound = 0;
         }
 
         TextBlock lastTextBlockClicked;
@@ -85,6 +91,7 @@ namespace MatchGame
             }
             else if (textBlock.Text == lastTextBlockClicked.Text)
             {
+                matchesFound++;
                 textBlock.Visibility = Visibility.Hidden;
                 findingMatch = false;
             }
@@ -95,7 +102,7 @@ namespace MatchGame
             }
         }
 
-        private void timeTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
+        private void TimeTextBlock_MouseDown(object sender, MouseButtonEventArgs e)
         {
 
             if(matchesFound == 8)
